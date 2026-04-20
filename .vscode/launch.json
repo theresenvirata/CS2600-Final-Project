@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/theresevirata/Documents/GitHub/School-Projects/2600-Final-Project/CS2600-Final-Project",
+      "program": "/Users/theresevirata/Documents/GitHub/School-Projects/2600-Final-Project/CS2600-Final-Project/build/Debug/outDebug"
+    }
+  ]
+}
