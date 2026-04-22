@@ -8,6 +8,9 @@
 #include <time.h>
 
 char* getWord();
+void printWelcome();
+void printHangmanFull();
+int validate(const char *answer, char *display, char guess);
 
 int main() {
 	printWelcome();
@@ -19,8 +22,24 @@ int main() {
 		printf("%s\n", word);
 	}
 
+	char guess;
 
-	
+	int attempts = 1;
+	while (attempts < 6) {
+		printf("Attempt %d: ", attempts);
+		scanf(" %c", &guess);
+
+		while(getchar() != '\n'); //used chatGPT on how to clear input buffer
+
+		if(validate(word, word, guess) == 1) {
+			printf("Correct guess!\n");
+			break;
+		} else {
+			printf("Incorrect guess. Try again.\n");
+			attempts++;
+		}
+
+	}	
 	return 0;
 }
 
@@ -73,7 +92,7 @@ void printWelcome() {
 	printf("- Try to solve the word before you run out of tries!\n\n");
 }
 
-int validate(const char *answer, char *display,  char *guess)
+int validate(const char *answer, char *display,  char guess)
 {
     int correct = 0;
     int length = strlen(answer);
@@ -85,6 +104,7 @@ int validate(const char *answer, char *display,  char *guess)
             correct = 1;
         }
     }
-    return correct;
+
+	return correct;
 
 }
