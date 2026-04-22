@@ -8,6 +8,9 @@
 #include <time.h>
 
 char* getWord();
+void printWelcome();
+void printHangmanFull();
+int validate(const char *answer, char *display, char guess);
 
 int main() {
 	printWelcome();
@@ -73,7 +76,7 @@ void printWelcome() {
 	printf("- Try to solve the word before you run out of tries!\n\n");
 }
 
-int validate(const char *answer, char *display,  char *guess)
+int validate(const char *answer, char *display,  char guess)
 {
     int correct = 0;
     int length = strlen(answer);
