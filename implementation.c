@@ -19,7 +19,7 @@ int main() {
 
 	char* word = getWord();
 	int wordLength = strlen(word);
-	char display[wordLength + 1]; //+1 for null terminator
+	char display[20]; //should be big enough to hold the word and null terminator, since the longest word is 10 characters long
 	initializeDisplay(word, display);
 	if (word != NULL) { //prints out actual word, delete in final product
 		printf("%s\n", word);
@@ -34,7 +34,7 @@ int main() {
 
 		while(getchar() != '\n'); //used chatGPT on how to clear input buffer
 
-		if(validate(word, word, guess) == 1) {
+		if(validate(word, display, guess) == 1) {
 			printf("Correct guess!\n");
 			break;
 		} else {
