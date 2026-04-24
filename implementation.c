@@ -11,13 +11,16 @@ char* getWord();
 void printWelcome();
 void printHangmanFull();
 int validate(const char *answer, char *display, char guess);
+void initializeDisplay(const char *answer, char *display);
 
 int main() {
 	printWelcome();
 	srand(time(NULL)); //creates a random seed for rand, otherwise we'd keep getting the same number :(
 
 	char* word = getWord();
-	
+	int wordLength = strlen(word);
+	char display[wordLength + 1]; //+1 for null terminator
+	initializeDisplay(word, display);
 	if (word != NULL) { //prints out actual word, delete in final product
 		printf("%s\n", word);
 	}
@@ -107,4 +110,12 @@ int validate(const char *answer, char *display,  char guess)
 
 	return correct;
 
+}
+
+void initializeDisplay(const char *answer, char *display) {
+	int length = strlen(answer);
+	for (int i = 0; i < length; i++) {
+		display[i] = '_';
+	}
+	display[length] = '\0'; // Null-terminate the string
 }
