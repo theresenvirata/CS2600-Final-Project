@@ -26,11 +26,9 @@ int main() {
 		printf("%s\n", word);
 	}
 
-	
-
-	int attempts = 1;
+	int attempts = 0;
 	while (attempts < 6) {
-		printf("Attempt %d: ", attempts);
+		printf("Attempt %d: ", attempts + 1);
 		scanf(" %c", &guess);
 
 		while(getchar() != '\n'); //used chatGPT on how to clear input buffer
@@ -38,7 +36,7 @@ int main() {
 		if(validate(word, display, guess) == 1) {
 			printf("Correct guess!\n");
 			printf("%s\n", display);
-			//break;
+			attempts++;
 			// this is supposed to check if the word guessed matches the actual word but it doesn't work not sure why.
 			if(strcmp(word, display) == 0) {
 				printf("Congratulations! You've guessed the word!\n");
@@ -49,7 +47,10 @@ int main() {
 			attempts++;
 		}
 
-	}	
+		if(attempts >= 6)
+			printf("Game over! The word was: %s\n", word);
+
+	}
 	return 0;
 }
 
@@ -74,6 +75,7 @@ char* getWord() {
 	}
 
 	fclose(fptr);
+	//answer[strcspn(answer, "\n")] = '\0'; //removes newline character from the end of the word
 	return answer;
 }
 
@@ -121,8 +123,8 @@ int validate(const char *answer, char *display,  char guess)
 
 void initializeDisplay(const char *answer, char *display) {
 	int length = strlen(answer);
-	for (int i = 0; i < length-1; i++) {
+	for (int i = 0; i < length - 1; i++) {
 		display[i] = '_';
 	}
-	display[length-1] = '\0'; // Null-terminate the string
+	display[length - 1] = '\0'; // Null-terminate the string
 }
