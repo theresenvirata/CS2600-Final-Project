@@ -11,13 +11,16 @@ char* getWord();
 void printWelcome();
 void printHangmanFull();
 int validate(const char *answer, char *display, char guess);
+void initializeDisplay(const char *answer, char *display);
 
 int main() {
 	printWelcome();
 	srand(time(NULL)); //creates a random seed for rand, otherwise we'd keep getting the same number :(
 
 	char* word = getWord();
-	
+	int wordLength = strlen(word);
+	char display[20]; //should be big enough to hold the word and null terminator, since the longest word is 10 characters long
+	initializeDisplay(word, display);
 	if (word != NULL) { //prints out actual word, delete in final product
 		printf("%s\n", word);
 	}
@@ -31,7 +34,7 @@ int main() {
 
 		while(getchar() != '\n'); //used chatGPT on how to clear input buffer
 
-		if(validate(word, word, guess) == 1) {
+		if(validate(word, display, guess) == 1) {
 			printf("Correct guess!\n");
 			break;
 		} else {
@@ -107,4 +110,12 @@ int validate(const char *answer, char *display,  char guess)
 
 	return correct;
 
+}
+
+void initializeDisplay(const char *answer, char *display) {
+	int length = strlen(answer);
+	for (int i = 0; i < length; i++) {
+		display[i] = '_';
+	}
+	display[length] = '\0'; // Null-terminate the string
 }
