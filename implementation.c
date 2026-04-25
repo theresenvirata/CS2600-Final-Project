@@ -73,7 +73,6 @@ char* getWord() {
 		}
 
 	}
-	answer[strcspn(answer, "\n")] = '\0';
 	fclose(fptr);
 	answer[strcspn(answer, "\n")] = '\0'; //removes newline character from the end of the word
 	return answer;
