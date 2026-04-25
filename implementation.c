@@ -11,35 +11,46 @@ char* getWord();
 void printWelcome();
 void printHangmanFull();
 int validate(const char *answer, char *display, char guess);
+void initializeDisplay(const char *answer, char *display);
 
 int main() {
+	char guess;
 	printWelcome();
 	srand(time(NULL)); //creates a random seed for rand, otherwise we'd keep getting the same number :(
 
 	char* word = getWord();
-	
+	int wordLength = strlen(word);
+	char display[20]; //should be big enough to hold the word and null terminator, since the longest word is 10 characters long
+	initializeDisplay(word, display);
 	if (word != NULL) { //prints out actual word, delete in final product
 		printf("%s\n", word);
 	}
 
-	char guess;
-
-	int attempts = 1;
+	int attempts = 0;
 	while (attempts < 6) {
-		printf("Attempt %d: ", attempts);
+		printf("Attempt %d: ", attempts + 1);
 		scanf(" %c", &guess);
 
 		while(getchar() != '\n'); //used chatGPT on how to clear input buffer
 
-		if(validate(word, word, guess) == 1) {
+		if(validate(word, display, guess) == 1) {
 			printf("Correct guess!\n");
-			break;
+			printf("%s\n", display);
+			attempts++;
+			// this is supposed to check if the word guessed matches the actual word but it doesn't work not sure why.
+			if(strcmp(word, display) == 0) {
+				printf("Congratulations! You've guessed the word!\n");
+				break;
+			}
 		} else {
 			printf("Incorrect guess. Try again.\n");
 			attempts++;
 		}
 
-	}	
+		if(attempts >= 6)
+			printf("Game over! The word was: %s\n", word);
+
+	}
 	return 0;
 }
 
@@ -64,6 +75,7 @@ char* getWord() {
 	}
 
 	fclose(fptr);
+	//answer[strcspn(answer, "\n")] = '\0'; //removes newline character from the end of the word
 	return answer;
 }
 
@@ -107,4 +119,12 @@ int validate(const char *answer, char *display,  char guess)
 
 	return correct;
 
+}
+
+void initializeDisplay(const char *answer, char *display) {
+	int length = strlen(answer);
+	for (int i = 0; i < length - 1; i++) {
+		display[i] = '_';
+	}
+	display[length - 1] = '\0'; // Null-terminate the string
 }
