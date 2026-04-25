@@ -49,6 +49,9 @@ int main() {
 			attempts++;
 		}
 
+	}
+	if (attemps >6) {
+		printf("Game over! The word was: %s\n", word);
 	}	
 	return 0;
 }
@@ -72,7 +75,7 @@ char* getWord() {
 		}
 
 	}
-
+	answer[strcspn(answer, "\n")] = '\0';
 	fclose(fptr);
 	return answer;
 }
@@ -121,8 +124,8 @@ int validate(const char *answer, char *display,  char guess)
 
 void initializeDisplay(const char *answer, char *display) {
 	int length = strlen(answer);
-	for (int i = 0; i < length-1; i++) {
+	for (int i = 0; i < length; i++) {
 		display[i] = '_';
 	}
-	display[length-1] = '\0'; // Null-terminate the string
+	display[length] = '\0'; // Null-terminate the string
 }
