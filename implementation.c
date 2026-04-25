@@ -14,6 +14,7 @@ int validate(const char *answer, char *display, char guess);
 void initializeDisplay(const char *answer, char *display);
 
 int main() {
+	char guess;
 	printWelcome();
 	srand(time(NULL)); //creates a random seed for rand, otherwise we'd keep getting the same number :(
 
@@ -25,7 +26,7 @@ int main() {
 		printf("%s\n", word);
 	}
 
-	char guess;
+	
 
 	int attempts = 1;
 	while (attempts < 6) {
@@ -36,7 +37,13 @@ int main() {
 
 		if(validate(word, display, guess) == 1) {
 			printf("Correct guess!\n");
-			break;
+			printf("%s\n", display);
+			//break;
+			// this is supposed to check if the word guessed matches the actual word but it doesn't work not sure why.
+			if(strcmp(word, display) == 0) {
+				printf("Congratulations! You've guessed the word!\n");
+				break;
+			}
 		} else {
 			printf("Incorrect guess. Try again.\n");
 			attempts++;
@@ -114,8 +121,8 @@ int validate(const char *answer, char *display,  char guess)
 
 void initializeDisplay(const char *answer, char *display) {
 	int length = strlen(answer);
-	for (int i = 0; i < length; i++) {
+	for (int i = 0; i < length-1; i++) {
 		display[i] = '_';
 	}
-	display[length] = '\0'; // Null-terminate the string
+	display[length-1] = '\0'; // Null-terminate the string
 }
