@@ -149,9 +149,7 @@ int validate(const char *answer, char *display,  char guess) {
 void initializeDisplay(const char *answer, char *display) {
 	int length = strlen(answer);
 	for (int i = 0; i < length; i++) {
-	for (int i = 0; i < length; i++) {
 		display[i] = '_';
 	}
-	display[length] = '\0'; // Null-terminate the string
 	display[length] = '\0'; // Null-terminate the string
 }
