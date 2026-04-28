@@ -12,6 +12,8 @@ void printWelcome();
 void printHangmanFull();
 int validate(const char *answer, char *display, char guess);
 void initializeDisplay(const char *answer, char *display);
+void printVictory();
+void printDefeat(const char *word);
 
 int main() {
 	char guess;
@@ -41,7 +43,7 @@ int main() {
 			//break;
 			// this is supposed to check if the word guessed matches the actual word but it doesn't work not sure why.
 			if(strcmp(word, display) == 0) {
-				printf("Congratulations! You've guessed the word!\n");
+				printVictory();
 				break;
 			}
 		} else {
@@ -49,6 +51,9 @@ int main() {
 			attempts++;
 		}
 
+	}
+	if (attempts == 6 && strcmp(word, display) != 0) {
+		printDefeat(word);
 	}	
 	return 0;
 }
@@ -74,6 +79,7 @@ char* getWord() {
 	}
 
 	fclose(fptr);
+	answer[strcspn(answer, "\n")] = '\0'; //removes newline character from the end of the string
 	return answer;
 }
 
@@ -102,8 +108,31 @@ void printWelcome() {
 	printf("- Try to solve the word before you run out of tries!\n\n");
 }
 
-int validate(const char *answer, char *display,  char guess)
-{
+void printVictory() {
+	printf(
+		"\n----------------------------\n\n"
+		"           YOU WIN!\n"
+		"             \\O/\n"
+		"              |\n"
+		"             / \\\n\n"
+	);
+}
+
+void printDefeat(const char *word) {
+	printf(
+		"\n----------------------------\n\n"
+			"           +----------+\n"
+        	"           |          |\n"
+        	"          YOU         |\n"
+        	"          LOSE        |\n"
+        	"                      |\n"
+        	"                      |\n"
+        	"   ====================\n"
+	);
+	printf("\nThe word was: %s\n", word);
+}
+
+int validate(const char *answer, char *display,  char guess) {
     int correct = 0;
     int length = strlen(answer);
     for  (int i = 0; i < length; i++) 
@@ -121,8 +150,8 @@ int validate(const char *answer, char *display,  char guess)
 
 void initializeDisplay(const char *answer, char *display) {
 	int length = strlen(answer);
-	for (int i = 0; i < length-1; i++) {
+	for (int i = 0; i < length; i++) {
 		display[i] = '_';
 	}
-	display[length-1] = '\0'; // Null-terminate the string
+	display[length] = '\0'; // Null-terminate the string
 }
