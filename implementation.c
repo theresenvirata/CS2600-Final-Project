@@ -9,6 +9,7 @@
 
 char* getWord();
 void printWelcome();
+void printIncorrectGuess();
 void printHangmanFull();
 int validate(const char *answer, char *display, char guess);
 void initializeDisplay(const char *answer, char *display);
@@ -47,6 +48,7 @@ int main() {
 		} else {
 			printf("Incorrect guess. Try again.\n");
 			attempts++;
+			printIncorrectGuess(attempts);
 		}
 
 	}
@@ -79,6 +81,67 @@ char* getWord() {
 	fclose(fptr);
 	answer[strcspn(answer, "\n")] = '\0'; //removes newline character from the end of the string
 	return answer;
+}
+
+void printIncorrectGuess(int attempts) {
+	if (attempts == 1) {
+		printf(
+				"  +---+\n"
+        		"  |   |\n"
+        		"  O   |\n"
+        		"      |\n"
+        		"      |\n"
+        		"      |\n"
+        		"=========\n"
+		);
+	}
+	else if (attempts == 2) {
+		printf(  
+				"+---+\n"
+        		"  |   |\n"
+        		"  O   |\n"
+        		"  |   |\n"
+        		"      |\n"
+        		"      |\n"
+        		"=========\n"
+		);
+	}
+	else if (attempts == 3) {
+		printf(
+				"  +---+\n"
+        		"  |   |\n"
+        		"  O   |\n"
+        		" /|   |\n"
+        		"      |\n"
+        		"      |\n"
+        		"=========\n"
+		);
+	}
+	else if (attempts == 4) {
+		printf(
+				"  +---+\n"
+        		"  |   |\n"
+        		"  O   |\n"
+        		" /|\\ |\n"
+        		"      |\n"
+        		"      |\n"
+        		"=========\n"
+		);
+	}
+	else if (attempts == 5) {
+		printf(
+				"  +---+\n"
+        		"  |   |\n"
+        		"  O   |\n"
+        		" /|\\ |\n"
+        		" /    |\n"
+        		"      |\n"
+        		"=========\n"
+		);
+	}
+	else {
+		printHangmanFull();
+	}
 }
 
 // Function to print full hangman
