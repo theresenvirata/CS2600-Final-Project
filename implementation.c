@@ -9,7 +9,7 @@
 
 char* getWord();
 void printWelcome();
-void printIncorrectGuess();
+void printIncorrectGuess(int attempts);
 void printHangmanFull();
 int validate(const char *answer, char *display, char guess);
 void initializeDisplay(const char *answer, char *display);
