@@ -4,4 +4,5 @@ The purpose of this game is for the user to guess the word by inputting characte
 
 ## How to Play
 1. Run the makefile
-2. Input guesses one character at a time
+2. Run ./hangman into the terminal to start the game
+3. Input guesses one character at a time
