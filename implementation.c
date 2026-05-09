@@ -25,9 +25,7 @@ int main() {
 	int wordLength = strlen(word);
 	char display[20]; //should be big enough to hold the word and null terminator, since the longest word is 10 characters long
 	initializeDisplay(word, display);
-	if (word != NULL) { //prints out actual word, delete in final product
-		printf("%s\n", word);
-	}
+	
 
 	int attempts = 0;
 	while (attempts < 6) {
